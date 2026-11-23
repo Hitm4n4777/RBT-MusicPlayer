@@ -182,3 +182,34 @@
     border-right-color: var(--border);
   }
 }
+
+
+.app {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.app-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.app-aurora > * {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar,
+.main-content {
+  position: relative;
+  background: transparent;
+}
+
+.main-content-inner {
+  position: relative;
+  min-height: 100%;
+}

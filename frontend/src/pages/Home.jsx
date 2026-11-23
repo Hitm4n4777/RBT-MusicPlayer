@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Music2, Play, RefreshCw } from "lucide-react";
 import { getSongs, getSongStreamUrl } from "../services/api";
+import SoftAurora from "../components/SoftAurora";
 
 function Home({ onSelectTrack, onSongsLoaded }) {
   const [songs, setSongs] = useState([]);
