@@ -14,7 +14,7 @@ architecture without relying on external music streaming services.
 
 ## Overview
 
-<video src="frontend/public/2026-11-24 12-35-13_Trim.mp4" autoplay loop muted playsinline width="600"></video>
+<video autoplay muted loop src="frontend/public/2026-11-24 12-35-13_Trim.mp4" title="DEMO"></video>
 
 RBT-WebPlayer was created to provide a dedicated space for managing and
 listening to personal music collections.
