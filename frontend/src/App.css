@@ -213,3 +213,63 @@
   position: relative;
   min-height: 100%;
 }
+
+/* ========================================
+   CUSTOM PLAYER SLIDERS
+======================================== */
+
+.volume-control input[type="range"] {
+  width: 150px;
+  flex: 0 0 90px;
+}
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 20px;
+  background: #383d3b;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Chromium / Opera */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a2e6bd;
+  border: 2px solid #171a18;
+  box-shadow: 0 0 8px rgba(162, 230, 189, 0.35);
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a2e6bd;
+  border: 2px solid #171a18;
+  box-shadow: 0 0 8px rgba(162, 230, 189, 0.35);
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 5px;
+  border-radius: 20px;
+  background: #383d3b;
+}
+
+/* Focus */
+input[type="range"]:focus-visible {
+  outline: 2px solid rgba(162, 230, 189, 0.5);
+  outline-offset: 5px;
+}

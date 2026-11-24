@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
-import { Music2, Play, RefreshCw } from "lucide-react";
-import { getSongs, getSongStreamUrl } from "../services/api";
+import { ListPlus, Music2, Play, RefreshCw } from "lucide-react";
+import {
+  addSongToPlaylist,
+  getPlaylists,
+  getSongs,
+  getSongStreamUrl,
+} from "../services/api";
 import SoftAurora from "../components/SoftAurora";
 
 function Home({ onSelectTrack, onSongsLoaded }) {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [playlists, setPlaylists] = useState([]);
+  const [openMenuSongId, setOpenMenuSongId] = useState(null);
 
   const loadSongs = async () => {
     try {
       setLoading(true);
       setError("");
 
-      const data = await getSongs();
+      const [data, playlistData] = await Promise.all([
+        getSongs(),
+        getPlaylists(),
+      ]);
       setSongs(data);
+      setPlaylists(playlistData);
       onSongsLoaded(data);
     } catch (err) {
       console.error("Failed to load songs:", err);
@@ -28,6 +39,17 @@ function Home({ onSelectTrack, onSongsLoaded }) {
     loadSongs();
   }, []);
 
+  const handleAddToPlaylist = async (playlistId, songId) => {
+    try {
+      await addSongToPlaylist(playlistId, songId);
+      setOpenMenuSongId(null);
+      setError("");
+    } catch (err) {
+      console.error("Failed to add song to playlist:", err);
+      setError("Could not add the song to that playlist.");
+    }
+  };
+
   const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
@@ -39,7 +61,7 @@ function Home({ onSelectTrack, onSongsLoaded }) {
     return <div className="library-message">Loading your library...</div>;
   }
 
-  if (error) {
+  if (error && songs.length === 0) {
     return (
       <div className="library-message">
         <p>{error}</p>
@@ -62,6 +84,8 @@ function Home({ onSelectTrack, onSongsLoaded }) {
           <RefreshCw size={18} />
         </button>
       </div>
+
+      {error && <div className="playlist-error library-error">{error}</div>}
 
       {songs.length === 0 ? (
         <div className="empty-library">
@@ -90,18 +114,49 @@ function Home({ onSelectTrack, onSongsLoaded }) {
                 {formatDuration(song.duration || 0)}
               </span>
 
-              <button
-                className="play-button"
-                onClick={() =>
-                  onSelectTrack({
-                    ...song,
-                    streamUrl: getSongStreamUrl(song.id),
-                  })
-                }
-                title="Play song"
-              >
-                <Play size={18} />
-              </button>
+              <div className="song-actions">
+                <div className="playlist-menu-wrap">
+                  <button
+                    className="add-playlist-button"
+                    onClick={() =>
+                      setOpenMenuSongId(
+                        openMenuSongId === song.id ? null : song.id,
+                      )
+                    }
+                    title="Add to playlist"
+                    disabled={playlists.length === 0}
+                  >
+                    <ListPlus size={17} />
+                  </button>
+                  {openMenuSongId === song.id && (
+                    <div className="playlist-menu">
+                      {playlists.map((playlist) => (
+                        <button
+                          key={playlist.id}
+                          onClick={() =>
+                            handleAddToPlaylist(playlist.id, song.id)
+                          }
+                        >
+                          {playlist.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  className="play-button"
+                  onClick={() =>
+                    onSelectTrack({
+                      ...song,
+                      streamUrl: getSongStreamUrl(song.id),
+                    })
+                  }
+                  title="Play song"
+                >
+                  <Play size={18} />
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 const api = axios.create({
@@ -31,6 +30,42 @@ export const uploadSong = async (file, onUploadProgress) => {
 // DELETE SONG
 export const deleteSong = async (songId) => {
     const response = await api.delete(`/songs/${songId}`);
+    return response.data;
+};
+
+// GET ALL PLAYLISTS
+export const getPlaylists = async () => {
+    const response = await api.get("/playlists/");
+    return response.data;
+};
+
+// GET PLAYLIST DETAILS
+export const getPlaylist = async (playlistId) => {
+    const response = await api.get(`/playlists/${playlistId}`);
+    return response.data;
+};
+
+// CREATE PLAYLIST
+export const createPlaylist = async (name, description = "") => {
+    const response = await api.post("/playlists/", { name, description });
+    return response.data;
+};
+
+// ADD SONG TO PLAYLIST
+export const addSongToPlaylist = async (playlistId, songId) => {
+    const response = await api.post(`/playlists/${playlistId}/songs/${songId}`);
+    return response.data;
+};
+
+// REMOVE SONG FROM PLAYLIST
+export const removeSongFromPlaylist = async (playlistId, songId) => {
+    const response = await api.delete(`/playlists/${playlistId}/songs/${songId}`);
+    return response.data;
+};
+
+// DELETE PLAYLIST
+export const deletePlaylist = async (playlistId) => {
+    const response = await api.delete(`/playlists/${playlistId}`);
     return response.data;
 };
 

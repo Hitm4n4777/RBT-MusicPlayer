@@ -10,7 +10,7 @@ from sqlalchemy import (
     Table,
     func
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
@@ -82,7 +82,11 @@ class Song(Base):
     file_format = Column(String(20))
     file_size = Column(Integer)
 
-    is_favorite = Column(Boolean, default=False)
+    is_favorite: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
     play_count = Column(Integer, default=0)
 
     date_added = Column(
