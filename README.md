@@ -10,7 +10,9 @@ own music collection through a clean, modern web interface.
 The project focuses on simplicity, local storage, and a lightweight
 architecture without relying on external music streaming services.
 
-------------------------------------------------------------------------
+---
+
+<video src="frontend/public/2026-11-24 12-35-13_Trim.mp4" title="Title"></video>
 
 ## Overview
 
@@ -29,104 +31,69 @@ modern music applications.
 
 ### Music Library
 
--   Upload personal audio files.
--   Automatically extract embedded audio metadata.
--   Display song titles, artists, albums, genres, and durations.
--   Browse the personal music collection.
--   Store music files locally.
+- Upload personal audio files.
+- Automatically extract embedded audio metadata.
+- Display song titles, artists, albums, genres, and durations.
+- Browse the personal music collection.
+- Store music files locally.
 
 ### Audio Player
 
--   Stream audio directly from the backend.
--   Play and pause tracks.
--   Skip to the next or previous track.
--   Seek through audio using a progress bar.
--   Adjust playback volume.
--   Display current playback information.
+- Stream audio directly from the backend.
+- Play and pause tracks.
+- Skip to the next or previous track.
+- Seek through audio using a progress bar.
+- Adjust playback volume.
+- Display current playback information.
 
 ### Music Management
 
--   Retrieve songs from the local database.
--   Upload new audio files.
--   Remove songs from the collection.
--   Maintain song information and metadata.
+- Retrieve songs from the local database.
+- Upload new audio files.
+- Remove songs from the collection.
+- Maintain song information and metadata.
 
 ### Interface
 
--   Modern dark-themed interface.
--   Responsive layout.
--   Dedicated music library.
--   Sidebar navigation.
--   Persistent playback controls.
--   Muted green accent colors and minimal styling.
+- Modern dark-themed interface.
+- Responsive layout.
+- Dedicated music library.
+- Sidebar navigation.
+- Persistent playback controls.
+- Muted green accent colors and minimal styling.
 
-------------------------------------------------------------------------
+---
 
 ## Tech Stack
 
 ### Frontend
 
-  Technology         Purpose
-  ------------------ -------------------------------------
-  React 19           Component-based UI
-  Vite               Frontend development and build tool
-  JavaScript (JSX)   Application logic
-  CSS                Styling and responsive layouts
-  Axios              API communication
-  Lucide React       Interface icons
+Technology Purpose
+
+---
+
+React 19 Component-based UI
+Vite Frontend development and build tool
+JavaScript (JSX) Application logic
+CSS Styling and responsive layouts
+Axios API communication
+Lucide React Interface icons
 
 ### Backend
 
-  Technology         Purpose
-  ------------------ ---------------------------
-  Python             Backend development
-  FastAPI            REST API
-  SQLAlchemy         Database ORM
-  SQLite             Local database
-  Mutagen            Audio metadata extraction
-  Uvicorn            ASGI server
-  Python Multipart   Audio file uploads
+Technology Purpose
 
-------------------------------------------------------------------------
+---
 
-## Architecture
+Python Backend development
+FastAPI REST API
+SQLAlchemy Database ORM
+SQLite Local database
+Mutagen Audio metadata extraction
+Uvicorn ASGI server
+Python Multipart Audio file uploads
 
-The application follows a separated frontend and backend architecture.
-
-``` text
-RBT-WebPlayer/
-│
-├── frontend/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   │   └── Player.jsx
-│   │   ├── pages/
-│   │   │   └── Home.jsx
-│   │   ├── services/
-│   │   │   └── api.js
-│   │   ├── App.jsx
-│   │   └── App.css
-│   └── package.json
-│
-└── backend/
-    ├── app/
-    │   ├── routes/
-    │   │   ├── songs.py
-    │   │   ├── playlists.py
-    │   │   └── genres.py
-    │   ├── main.py
-    │   ├── database.py
-    │   ├── models.py
-    │   └── metadata.py
-    ├── storage/
-    │   ├── music/
-    │   ├── artwork/
-    │   └── music.db
-    └── requirements.txt
-```
-
-*Note: Some folders and modules are reserved for planned functionality.*
+---
 
 ### How It Works
 
@@ -141,7 +108,7 @@ RBT-WebPlayer/
     endpoints.
 8.  The browser's audio playback functionality handles playback.
 
-------------------------------------------------------------------------
+---
 
 ## Installation and Setup
 
@@ -149,13 +116,13 @@ RBT-WebPlayer/
 
 Make sure you have the following installed:
 
--   Python 3.10+
--   Node.js and npm
--   Git
+- Python 3.10+
+- Node.js and npm
+- Git
 
 ### 1. Clone the Repository
 
-``` bash
+```bash
 git clone https://github.com/Hitm4n4777/RBT-WebPlayer.git
 cd RBT-WebPlayer
 ```
@@ -164,49 +131,49 @@ cd RBT-WebPlayer
 
 Navigate to the backend directory:
 
-``` bash
+```bash
 cd backend
 ```
 
 Create a virtual environment:
 
-``` bash
+```bash
 python -m venv .venv
 ```
 
 Activate it on Windows:
 
-``` powershell
+```powershell
 .venv\Scripts\activate
 ```
 
 Install dependencies:
 
-``` bash
+```bash
 pip install fastapi "uvicorn[standard]" sqlalchemy mutagen python-multipart
 ```
 
 Save installed dependencies:
 
-``` bash
+```bash
 pip freeze > requirements.txt
 ```
 
 Start the backend server:
 
-``` bash
+```bash
 uvicorn app.main:app --reload
 ```
 
 The backend will run at:
 
-``` text
+```text
 http://127.0.0.1:8000
 ```
 
 API documentation:
 
-``` text
+```text
 http://127.0.0.1:8000/docs
 ```
 
@@ -214,50 +181,52 @@ http://127.0.0.1:8000/docs
 
 Open another terminal and navigate to the frontend directory:
 
-``` bash
+```bash
 cd frontend
 ```
 
 Install dependencies:
 
-``` bash
+```bash
 npm install
 ```
 
 Install the required packages if they are not already installed:
 
-``` bash
+```bash
 npm install axios lucide-react
 ```
 
 Start the development server:
 
-``` bash
+```bash
 npm run dev
 ```
 
 The frontend will typically be available at:
 
-``` text
+```text
 http://localhost:5173
 ```
 
-------------------------------------------------------------------------
+---
 
 ## API Endpoints
 
 The backend exposes REST API endpoints for interacting with the music
 library.
 
-  Method   Endpoint                   Description
-  -------- -------------------------- ----------------------
-  GET      `/api/status`              Check API status
-  GET      `/api/songs/`              Retrieve all songs
-  POST     `/api/songs/upload`        Upload a new song
-  GET      `/api/songs/{id}/stream`   Stream an audio file
-  DELETE   `/api/songs/{id}`          Delete a song
+Method Endpoint Description
 
-------------------------------------------------------------------------
+---
+
+GET `/api/status` Check API status
+GET `/api/songs/` Retrieve all songs
+POST `/api/songs/upload` Upload a new song
+GET `/api/songs/{id}/stream` Stream an audio file
+DELETE `/api/songs/{id}` Delete a song
+
+---
 
 ## Development Challenges
 
@@ -323,26 +292,26 @@ creating something that feels like a dedicated music application.
 The design evolved towards a dark, minimal aesthetic with muted green
 accents, responsive layouts, and dedicated playback controls.
 
-------------------------------------------------------------------------
+---
 
 ## Future Improvements
 
 RBT-WebPlayer is an ongoing project. Planned improvements include:
 
--   [ ] Playlist creation and management.
--   [ ] Album artwork extraction and display.
--   [ ] Search and filtering.
--   [ ] Favorite tracks.
--   [ ] Recently played songs.
--   [ ] Shuffle and repeat playback.
--   [ ] Queue management.
--   [ ] Editing song metadata.
--   [ ] Importing entire music folders.
--   [ ] Improved audio player controls.
--   [ ] Better mobile responsiveness.
--   [ ] Playback history and statistics.
+- [ ] Playlist creation and management.
+- [ ] Album artwork extraction and display.
+- [ ] Search and filtering.
+- [ ] Favorite tracks.
+- [ ] Recently played songs.
+- [ ] Shuffle and repeat playback.
+- [ ] Queue management.
+- [ ] Editing song metadata.
+- [ ] Importing entire music folders.
+- [ ] Improved audio player controls.
+- [ ] Better mobile responsiveness.
+- [ ] Playback history and statistics.
 
-------------------------------------------------------------------------
+---
 
 ## Project Goals
 
@@ -354,12 +323,12 @@ The project also serves as a practical exploration of full-stack
 development, REST API design, database management, file handling, audio
 metadata processing, and modern React development.
 
-------------------------------------------------------------------------
+---
 
 ## License
 
 This project is intended for personal use and educational purposes.
 
-------------------------------------------------------------------------
+---
 
 **Built with React, FastAPI, Python, and a love for music.**
