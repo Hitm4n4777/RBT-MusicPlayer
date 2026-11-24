@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { ListPlus, Music2, Play, RefreshCw } from "lucide-react";
+import { Heart, ListPlus, Music2, Play, RefreshCw } from "lucide-react";
 import {
   addSongToPlaylist,
   getPlaylists,
   getSongs,
   getSongStreamUrl,
+  updateFavorite,
 } from "../services/api";
+import DotMenu from "../components/DotMenu";
 import SoftAurora from "../components/SoftAurora";
 
 function Home({ onSelectTrack, onSongsLoaded }) {
@@ -13,7 +15,6 @@ function Home({ onSelectTrack, onSongsLoaded }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [playlists, setPlaylists] = useState([]);
-  const [openMenuSongId, setOpenMenuSongId] = useState(null);
 
   const loadSongs = async () => {
     try {
@@ -42,11 +43,25 @@ function Home({ onSelectTrack, onSongsLoaded }) {
   const handleAddToPlaylist = async (playlistId, songId) => {
     try {
       await addSongToPlaylist(playlistId, songId);
-      setOpenMenuSongId(null);
       setError("");
     } catch (err) {
       console.error("Failed to add song to playlist:", err);
       setError("Could not add the song to that playlist.");
+    }
+  };
+
+  const handleToggleFavorite = async (songId, isFavorite) => {
+    try {
+      await updateFavorite(songId, !isFavorite);
+      setSongs((prevSongs) =>
+        prevSongs.map((song) =>
+          song.id === songId ? { ...song, is_favorite: !isFavorite } : song,
+        ),
+      );
+      setError("");
+    } catch (err) {
+      console.error("Failed to update favorite status:", err);
+      setError("Could not update favorite status.");
     }
   };
 
@@ -115,35 +130,12 @@ function Home({ onSelectTrack, onSongsLoaded }) {
               </span>
 
               <div className="song-actions">
-                <div className="playlist-menu-wrap">
-                  <button
-                    className="add-playlist-button"
-                    onClick={() =>
-                      setOpenMenuSongId(
-                        openMenuSongId === song.id ? null : song.id,
-                      )
-                    }
-                    title="Add to playlist"
-                    disabled={playlists.length === 0}
-                  >
-                    <ListPlus size={17} />
-                  </button>
-                  {openMenuSongId === song.id && (
-                    <div className="playlist-menu">
-                      {playlists.map((playlist) => (
-                        <button
-                          key={playlist.id}
-                          onClick={() =>
-                            handleAddToPlaylist(playlist.id, song.id)
-                          }
-                        >
-                          {playlist.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
+                <DotMenu
+                  song={song}
+                  playlists={playlists}
+                  onAddToPlaylist={handleAddToPlaylist}
+                  onToggleFavorite={handleToggleFavorite}
+                />
                 <button
                   className="play-button"
                   onClick={() =>

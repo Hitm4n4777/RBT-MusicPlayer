@@ -741,3 +741,151 @@ button {
     font-size: 24px;
   }
 }
+
+
+/* Dot menu */
+
+
+.dot-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.dot-menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dot-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.dot-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+
+  min-width: 190px;
+  padding: 6px;
+
+  background: rgba(25, 20, 32, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+
+  z-index: 100;
+  animation: menuFadeIn 0.15s ease;
+}
+
+.dot-menu-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  padding: 11px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 13px;
+  text-align: left;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dot-menu-option:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.dot-menu-option.danger {
+  color: #ff6464;
+}
+
+.dot-menu-option.danger:hover {
+  background: rgba(255, 70, 70, 0.12);
+}
+
+/* Nested submenu styles */
+
+.dot-submenu-wrap { position: relative; }
+
+.dot-submenu-chevron {
+  margin-left: auto;
+}
+
+.dot-submenu {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 6px);
+  min-width: 180px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(25, 20, 32, 0.98);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.42);
+  z-index: 110;
+}
+
+.dot-submenu-option {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  overflow: hidden;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dot-submenu-option:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.dot-submenu-empty {
+  display: block;
+  padding: 9px 10px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+}
+
+.dot-menu-option.favorite-active {
+  color: #a2e6bd;
+}
+
+@media (max-width: 600px) {
+  .dot-submenu {
+    right: auto;
+    left: 0;
+    top: calc(100% + 6px);
+  }
+}

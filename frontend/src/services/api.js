@@ -69,4 +69,18 @@ export const deletePlaylist = async (playlistId) => {
     return response.data;
 };
 
+// UPDATE FAVORITE STATUS
+export const updateFavorite = async (songId, isFavorite) => {
+    const response = await api.patch(`/favorites/${songId}`, {
+        is_favorite: isFavorite,
+    });
+    return response.data;
+};
+
+// GET FAVORITE SONGS
+export const getFavorites = async () => {
+    const response = await api.get("/favorites/");
+    return response.data;
+};
+
 export default api;

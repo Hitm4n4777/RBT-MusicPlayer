@@ -5,7 +5,7 @@ import Playlists from "./pages/Playlists";
 import Player from "./components/Player";
 import SoftAurora from "./components/SoftAurora";
 import { getSongStreamUrl } from "./services/api";
-
+import Favorites from "./pages/Favorites";
 import "./App.css";
 
 function App() {
@@ -39,12 +39,7 @@ function App() {
         return <Playlists allSongs={songs} onSelectTrack={handleSelectTrack} />;
 
       case "favorites":
-        return (
-          <div className="page-placeholder">
-            <h1>Favorites</h1>
-            <p>Your favorite songs will appear here.</p>
-          </div>
-        );
+        return <Favorites allSongs={songs} onSelectTrack={handleSelectTrack} />;
 
       default:
         return null;
