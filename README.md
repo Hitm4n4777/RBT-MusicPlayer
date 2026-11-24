@@ -12,6 +12,8 @@ architecture without relying on external music streaming services.
 
 ------------------------------------------------------------------------
 
+https://github.com/user-attachments/assets/1608b6a4-788a-45fa-984e-7015bac244bc
+
 ## Overview
 
 RBT-WebPlayer was created to provide a dedicated space for managing and
