@@ -12,15 +12,7 @@ architecture without relying on external music streaming services.
 
 ---
 
-<video
-src="frontend/public/2026-11-24 12-35-13_Trim.mp4"
-width="100%"
-autoplay
-muted
-loop
-playsinline
-
-> </video>
+<video src="frontend/public/2026-11-24 12-35-13_Trim.mp4" title="DEMO"></video>
 
 ## Overview
 
