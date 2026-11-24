@@ -12,7 +12,7 @@ architecture without relying on external music streaming services.
 
 ---
 
-<video src="frontend/public/2026-11-24 12-35-13_Trim.mp4" title="Title"></video>
+<video controls src="frontend/public/2026-11-24 12-35-13_Trim.mp4" title="Title"></video>
 
 ## Overview
 
